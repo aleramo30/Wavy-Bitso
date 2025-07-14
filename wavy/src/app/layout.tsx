@@ -1,24 +1,33 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
-import Providers from "@/components/context/providers";
-import { ThemeProvider } from "@/components/theme-provider";
+import { Header } from "@/components/search/header";
+import "../globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Wavy Node - AI-powered threat detection",
-	description: "AI-powered threat detection and identification of transactions",
+  title: "Wavy Node",
+  description: "Find the status of an address",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <Providers>{children}</Providers>
-        </ThemeProvider>
-      </body>
-    </html>
+    <div
+      className={`${inter.className} min-h-screen bg-background flex flex-col`}
+    >
+      <Header>
+        <main className="flex-grow">{children}</main>
+        <footer className="py-6 text-center text-sm text-muted-foreground">
+          <a
+            href="https://t.me/wavynode"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            @wavynode
+          </a>
+        </footer>
+      </Header>
+    </div>
   );
 }
